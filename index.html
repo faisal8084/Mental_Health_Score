@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindGauge — Student Mental Health Predictor</title>
+  <meta name="description" content="Estimate a student's mental wellbeing score from social media and lifestyle habits, powered by a trained ML model." />
+
+  <!-- Fonts: Fraunces (display), Inter (body/UI), IBM Plex Mono (data/numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ SKIP LINK (Accessibility) ============ -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar" aria-label="Primary">
+      <a href="#top" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="13" r="11" stroke="currentColor" stroke-width="2"/>
+            <path d="M13 6.5V13L17 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">MindGauge</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#top" class="nav-link">Home</a></li>
+        <li><a href="#assess" class="nav-link">Assessment</a></li>
+        <li><a href="#result" class="nav-link">Result</a></li>
+        <li><a href="#insights" class="nav-link">Insights</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <svg class="icon icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 2.5V5M12 19V21.5M4.2 4.2L6 6M18 18L19.8 19.8M2.5 12H5M19 12H21.5M4.2 19.8L6 18M18 6L19.8 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Digital wellbeing, quantified</p>
+          <h1 class="hero-title">
+            How is social media<br />
+            shaping your <span class="hero-accent">mind</span>?
+          </h1>
+          <p class="hero-sub">
+            MindGauge reads your daily habits — screen time, sleep, stress, study
+            and activity — and turns them into a single, evidence-informed
+            wellbeing score using a trained prediction model.
+          </p>
+          <div class="hero-cta-row">
+            <a href="#assess" class="btn btn-primary">Start assessment</a>
+            <a href="#insights" class="btn btn-ghost">How it works</a>
+          </div>
+          <ul class="hero-stats" aria-label="Model highlights">
+            <li><span class="stat-num">12+</span><span class="stat-label">lifestyle factors</span></li>
+            <li><span class="stat-num">0–10</span><span class="stat-label">wellbeing scale</span></li>
+            <li><span class="stat-num">&lt;1s</span><span class="stat-label">prediction time</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="dial-preview">
+            <svg viewBox="0 0 220 220" class="dial-svg">
+              <circle cx="110" cy="110" r="92" class="dial-track" />
+              <circle cx="110" cy="110" r="92" class="dial-progress dial-progress-preview" />
+            </svg>
+            <div class="dial-center">
+              <span class="dial-value">7.4</span>
+              <span class="dial-unit">/ 10</span>
+            </div>
+          </div>
+          <div class="floating-chip chip-sleep">🌙 Sleep 7.2h</div>
+          <div class="floating-chip chip-screen">📱 Usage 3.1h</div>
+          <div class="floating-chip chip-stress">🧠 Stress: Low</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASSESSMENT / FORM SECTION ============ -->
+    <section class="assess-section" id="assess">
+      <div class="section-head">
+        <p class="eyebrow">Step one</p>
+        <h2 class="section-title">Tell us about your day</h2>
+        <p class="section-sub">All fields are required for an accurate prediction. Nothing is stored — your data is sent directly to the model and discarded.</p>
+      </div>
+
+      <div class="assess-grid">
+        <!-- FORM CARD -->
+        <form class="card form-card" id="predictForm" novalidate>
+
+          <fieldset class="form-fieldset">
+            <legend class="fieldset-legend">Profile</legend>
+            <div class="field-grid">
+              <div class="field">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="10" max="100" placeholder="e.g. 21" required />
+                <span class="field-error" id="err-age" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <span class="field-error" id="err-gender" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="e.g. India" required />
+                <span class="field-error" id="err-country" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="academic_level">Academic level</label>
+                <select id="academic_level" name="academic_level" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="High School">High School</option>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                </select>
+                <span class="field-error" id="err-academic_level" role="alert"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend class="fieldset-legend">Social media habits</legend>
+            <div class="field-grid">
+              <div class="field">
+                <label for="most_used_platform">Most-used platform</label>
+                <select id="most_used_platform" name="most_used_platform" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Facebook</option>
+                  <option>LinkedIn</option>
+                  <option>Instagram</option>
+                  <option>Snapchat</option>
+                  <option>Twitter</option>
+                  <option>YouTube</option>
+                  <option>TikTok</option>
+                  <option>LINE</option>
+                  <option>KakaoTalk</option>
+                  <option>VKontakte</option>
+                  <option>WhatsApp</option>
+                  <option>WeChat</option>
+                </select>
+                <span class="field-error" id="err-most_used_platform" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="purpose_of_use">Primary purpose</label>
+                <select id="purpose_of_use" name="purpose_of_use" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Networking">Networking</option>
+                  <option value="Education">Education</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="News">News</option>
+                </select>
+                <span class="field-error" id="err-purpose_of_use" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="avg_daily_usage_hours">Avg. daily usage (hrs)</label>
+                <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" placeholder="e.g. 3.5" required />
+                <span class="field-error" id="err-avg_daily_usage_hours" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="daily_unlocks">Daily phone unlocks</label>
+                <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" placeholder="e.g. 60" required />
+                <span class="field-error" id="err-daily_unlocks" role="alert"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend class="fieldset-legend">Lifestyle &amp; wellbeing</legend>
+            <div class="field-grid">
+              <div class="field">
+                <label for="study_hours">Study hours / day</label>
+                <input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" placeholder="e.g. 4" required />
+                <span class="field-error" id="err-study_hours" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="physical_activity_hours">Physical activity (hrs)</label>
+                <input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" placeholder="e.g. 1" required />
+                <span class="field-error" id="err-physical_activity_hours" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="sleep_hours_per_night">Sleep hours / night</label>
+                <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" placeholder="e.g. 7" required />
+                <span class="field-error" id="err-sleep_hours_per_night" role="alert"></span>
+              </div>
+
+              <div class="field">
+                <label for="stress_level">Stress level</label>
+                <select id="stress_level" name="stress_level" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+                <span class="field-error" id="err-stress_level" role="alert"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-footer">
+            <p class="api-status" id="apiStatus">
+              <span class="status-dot" id="statusDot"></span>
+              <span id="statusText">Checking connection to API…</span>
+            </p>
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+              <span class="btn-label">Predict my score</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+
+        <!-- RESULT CARD -->
+        <div class="card result-card" id="result" aria-live="polite">
+          <div class="result-empty" id="resultEmpty">
+            <div class="empty-dial" aria-hidden="true">
+              <svg viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="66" class="dial-track" />
+              </svg>
+            </div>
+            <h3>Your result appears here</h3>
+            <p>Fill in the form and press <strong>Predict my score</strong> to see your wellbeing gauge.</p>
+          </div>
+
+          <div class="result-content" id="resultContent" hidden>
+            <p class="eyebrow">Predicted wellbeing score</p>
+            <div class="dial-preview dial-large">
+              <svg viewBox="0 0 220 220" class="dial-svg">
+                <circle cx="110" cy="110" r="92" class="dial-track" />
+                <circle cx="110" cy="110" r="92" class="dial-progress" id="resultDial" />
+              </svg>
+              <div class="dial-center">
+                <span class="dial-value" id="resultValue">0.0</span>
+                <span class="dial-unit">/ 10</span>
+              </div>
+            </div>
+            <p class="result-label" id="resultLabel">—</p>
+            <p class="result-desc" id="resultDesc"></p>
+
+            <ul class="result-breakdown" id="resultBreakdown"></ul>
+
+            <button type="button" class="btn btn-ghost btn-block" id="resetBtn">Run another assessment</button>
+          </div>
+
+          <div class="result-error" id="resultError" hidden role="alert">
+            <h3>Couldn't reach the prediction API</h3>
+            <p id="resultErrorMsg">Make sure your FastAPI server is running at <code>http://127.0.0.1:8000</code>.</p>
+            <button type="button" class="btn btn-ghost btn-block" id="retryBtn">Try again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INSIGHTS / HOW IT WORKS ============ -->
+    <section class="insights-section" id="insights">
+      <div class="section-head">
+        <p class="eyebrow">Under the hood</p>
+        <h2 class="section-title">How the prediction works</h2>
+        <p class="section-sub">A trained regression model looks for patterns across thousands of student responses to estimate wellbeing.</p>
+      </div>
+
+      <div class="insight-cards">
+        <article class="insight-card">
+          <div class="insight-icon" aria-hidden="true">①</div>
+          <h3>You share your habits</h3>
+          <p>Screen time, sleep, stress, study and activity levels — thirteen data points captured in one quick form.</p>
+        </article>
+        <article class="insight-card">
+          <div class="insight-icon" aria-hidden="true">②</div>
+          <h3>The model scores them</h3>
+          <p>A FastAPI service running a trained scikit-learn pipeline turns your inputs into a single 0–10 score.</p>
+        </article>
+        <article class="insight-card">
+          <div class="insight-icon" aria-hidden="true">③</div>
+          <h3>You get a clear gauge</h3>
+          <p>The result renders instantly as an animated dial with a plain-language read of what it means.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT SECTION ============ -->
+    <section class="about-section" id="about">
+      <div class="about-inner">
+        <div class="about-copy">
+          <p class="eyebrow">About this tool</p>
+          <h2 class="section-title">Built for awareness, not diagnosis</h2>
+          <p>
+            MindGauge is an educational demonstration of applied machine learning.
+            It estimates a general wellbeing score from self-reported digital and
+            lifestyle habits — it does not diagnose any mental health condition
+            and is not a substitute for professional care.
+          </p>
+          <p>
+            If you or someone you know is struggling, please reach out to a
+            licensed mental health professional or a local support service.
+          </p>
+        </div>
+        <div class="about-visual" aria-hidden="true">
+          <div class="about-card">
+            <span class="about-card-label">Model input</span>
+            <span class="about-card-value">13 features</span>
+          </div>
+          <div class="about-card">
+            <span class="about-card-label">Output range</span>
+            <span class="about-card-value">0.0 – 10.0</span>
+          </div>
+          <div class="about-card">
+            <span class="about-card-label">Served via</span>
+            <span class="about-card-value">FastAPI + REST</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="13" cy="13" r="11" stroke="currentColor" stroke-width="2"/>
+            <path d="M13 6.5V13L17 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">MindGauge</span>
+      </div>
+      <p class="footer-note">Educational demo · Not a medical device · Powered by a local FastAPI model</p>
+      <p class="footer-copyright">&copy; <span id="footerYear"></span> MindGauge. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
