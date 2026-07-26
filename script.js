@@ -8,7 +8,7 @@
    ========================================================================== */
 
 /* ---------- 1. CONFIG ---------- */
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = 'https://mental-health-score-0teb.onrender.com';
 const DIAL_CIRCUMFERENCE = 2 * Math.PI * 92; // matches r="92" in the SVG dials
 const SCORE_MAX = 10;
 
